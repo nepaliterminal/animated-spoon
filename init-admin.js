@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Initialize admin account for prankes1332@gmail.com
- * Run this after the first user registers with that email
+ * Initialize admin account
+ * Run this after the first user registers with the desired admin email
  * Usage: node init-admin.js
  */
 
@@ -23,15 +23,23 @@ function prompt(question) {
 
 async function main() {
   try {
+    // Get admin email from user input
+    const adminEmail = await prompt('Enter the admin email address: ');
+
+    if (!adminEmail || !adminEmail.includes('@')) {
+      console.log('❌ Invalid email address.\n');
+      process.exit(1);
+    }
+
     const db = getDb();
 
-    // Find the user with email prankes1332@gmail.com
+    // Find the user with the provided email
     const user = db.prepare(`
       SELECT id, name, email FROM users WHERE email = ?
-    `).get('prankes1332@gmail.com');
+    `).get(adminEmail);
 
     if (!user) {
-      console.log('❌ User prankes1332@gmail.com not found.');
+      console.log(`❌ User ${adminEmail} not found.`);
       console.log('   Please register that account first.\n');
       process.exit(1);
     }

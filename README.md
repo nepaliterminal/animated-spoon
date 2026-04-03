@@ -197,7 +197,7 @@ FRONTEND_ORIGIN=http://localhost:3000
 After initial user registration:
 
 1. **Log in with your account:**
-   - Signup with `prankes1332@gmail.com`
+   - Signup with your desired admin email
    - Verify your email with OTP
    - Set a password
 
@@ -206,7 +206,7 @@ After initial user registration:
    node init-admin.js
    ```
    This script will automatically:
-   - Find `prankes1332@gmail.com` in the database
+   - Find your admin email in the database
    - Grant admin privileges
    - Enable access to admin panel
 
