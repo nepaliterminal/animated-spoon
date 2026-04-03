@@ -1,23 +1,20 @@
 # 🚀 Deployment Guide
 
-## Option 1: Backend on Railway + Domain on Vercel
+## Deploy to Glitch (FREE) + Keep Vercel Domain
 
-### Step 1: Deploy Backend to Railway
+### Step 1: Deploy Backend to Glitch
 
-1. **Create Railway Account**
-   - Go to [Railway.app](https://railway.app)
-   - Login with GitHub
+1. **Go to [Glitch.com](https://glitch.com)**
+   - Sign up with GitHub (free)
 
-2. **Connect Repository**
-   - Click "Create New Project"
-   - Select "Deploy from GitHub"
-   - Choose your `animated-spoon` repository
-   - Select main branch
+2. **Create New Project**
+   - Click **"New Project"** → **"Import from GitHub"**
+   - Select `animated-spoon` repository
+   - Glitch auto-deploys!
 
 3. **Configure Environment Variables**
-   - Railway automatically detects `package.json`
-   - Go to "Variables" tab
-   - Add all from your `.env` file:
+   - In Glitch editor, click **".env"** button (bottom left)
+   - Add all variables from your `.env`:
      ```
      SMTP_HOST=smtp.gmail.com
      SMTP_PORT=587
@@ -32,55 +29,74 @@
      NODE_ENV=production
      ```
 
-4. **Deploy**
-   - Railway auto-deploys when you push to main
-   - Your backend URL will be: `https://yourdomain-production.up.railway.app`
+4. **Get Your Glitch URL**
+   - Your app is live at: `https://your-project-name.glitch.me`
    - Copy this URL!
 
-### Step 2: Update Frontend to Use Railway Backend
+### Step 2: Update Frontend API Endpoint
 
-Your frontend (index.html) has an API variable. Update it:
+In `index.html` line 2746, change:
 
-Find this line in `index.html`:
 ```javascript
+// OLD
 const API = 'http://localhost:3001';
+
+// NEW (use your Glitch URL)
+const API = 'https://your-project-name.glitch.me';
 ```
 
-Change to:
-```javascript
-const API = 'https://your-railway-url.up.railway.app';
-```
+### Step 3: Commit and Push
 
-### Step 3: Point Vercel Domain to Railway
-
-In Vercel:
-1. Go to your project settings → Domains
-2. Add your custom domain
-3. Create a CNAME record pointing to Railway:
-   - Name: `yourdomain.com`
-   - Value: Your Railway app URL
-
-Or use Railway's proxy:
-1. In Railway, go to Deployments → Custom Domain
-2. Point your Vercel domain there
-
-### Step 4: Redeploy
-
-Push updated code:
 ```bash
 git add index.html
-git commit -m "Update API endpoint to Railway production"
+git commit -m "Update API endpoint to Glitch production"
 git push origin main
 ```
 
-Railway auto-deploys!
+Your Glitch project auto-updates from GitHub!
+
+### Step 4: Connect Your Vercel Domain
+
+In Vercel dashboard:
+1. Go to **Settings** → **Domains**
+2. Add your custom domain
+3. Update DNS:
+   - Create CNAME record
+   - Point to: `your-project-name.glitch.me`
 
 ---
 
-## Verification
+## ✅ What You Get:
+- ✅ **Free forever** ✨
+- ✅ Backend running on Glitch
+- ✅ SQLite database persists
+- ✅ Your custom domain
+- ✅ All 50+ admin features work
+- ✅ Jump scares functional
 
-✅ Backend: `https://your-railway-url.up.railway.app/admin/users` (should require auth)
-✅ Frontend: `https://yourdomain.com` (should load your app)
-✅ Database: SQLite persists on Railway
+## 🔗 Useful Glitch Features:
+- Auto-deploys from GitHub on every push
+- Built-in logs and debugging
+- Environment variable management
+- Persistent file system (SQLite works!)
+- Free always (no credit card required!)
+
+## ⚠️ Notes:
+- Glitch projects go to sleep after 5 minutes of inactivity (normal for free tier)
+- When you access the site, it wakes up in ~10 seconds
+- For production, consider upgrading, but free tier is great for learning!
+
+---
+
+## Quick Setup Checklist:
+- [ ] Sign up on Glitch.com
+- [ ] Import `animated-spoon` from GitHub
+- [ ] Add `.env` variables
+- [ ] Get Glitch URL
+- [ ] Update `index.html` API endpoint
+- [ ] Push to GitHub
+- [ ] Update domain DNS
+- [ ] Test at yourdomain.com
 
 Done! 🎉
+
